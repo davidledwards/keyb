@@ -2,11 +2,21 @@ use crate::error::{Error, Result};
 
 pub struct Options {
     pub help: bool,
+    pub dec: bool,
+    pub hex: bool,
+    pub oct: bool,
+    pub name: bool,
 }
 
 impl Default for Options {
     fn default() -> Options {
-        Options { help: false }
+        Options {
+            help: false,
+            dec: false,
+            hex: false,
+            oct: false,
+            name: false,
+        }
     }
 }
 
@@ -20,6 +30,10 @@ impl Options {
         while let Some(arg) = it.next() {
             match arg.as_str() {
                 "--help" => opts.help = true,
+                "--dec" | "-d" => opts.dec = true,
+                "--hex" | "-h" => opts.hex = true,
+                "--oct" | "-o" => opts.oct = true,
+                "--name" | "-n" => opts.name = true,
                 _ => return Err(Error::Options(format!("{}: unexpected argument", arg))),
             };
         }
