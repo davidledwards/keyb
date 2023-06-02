@@ -1,13 +1,13 @@
 use crate::error::Result;
 use libc::c_int;
 use libc::{STDIN_FILENO, TCSADRAIN, VMIN, VTIME};
-use std::io;
+use std::io::{self, stdin, IsTerminal};
 use std::mem::MaybeUninit;
 
 pub use libc::termios;
 
 pub fn is_tty() -> bool {
-    unsafe { libc::isatty(libc::STDIN_FILENO) != 0 }
+    stdin().is_terminal()
 }
 
 pub fn init() -> Result<termios> {
