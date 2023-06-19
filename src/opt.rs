@@ -5,6 +5,7 @@ pub struct Options {
     pub dec: bool,
     pub hex: bool,
     pub oct: bool,
+    pub bin: bool,
     pub name: bool,
 }
 
@@ -15,6 +16,7 @@ impl Default for Options {
             dec: false,
             hex: false,
             oct: false,
+            bin: false,
             name: false,
         }
     }
@@ -33,6 +35,7 @@ impl Options {
                 "--dec" | "-d" => opts.dec = true,
                 "--hex" | "-h" => opts.hex = true,
                 "--oct" | "-o" => opts.oct = true,
+                "--bin" | "-b" => opts.bin = true,
                 "--name" | "-n" => opts.name = true,
                 _ => return Err(Error::Options(format!("{}: unexpected argument", arg))),
             };

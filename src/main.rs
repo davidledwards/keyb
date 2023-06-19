@@ -22,23 +22,25 @@ usage: keyb OPTIONS
   combinations of keystrokes. For example, Unicode characters would be encoded
   as a sequence of bytes.
 
-  By default, each bytes read from the terminal is displayed on a single line
+  By default, each byte read from the terminal is displayed on a single line
   of output as follows:
 
-    ddd xx ooo [name]
+    ddd xx ooo bbbbbbbb [name]
 
-  where ddd, xx, and ooo are the decimal, hexadecimal, and octal forms, and
-  [name] is a name printed only when bytes are in the range of [0,127].
+  where ddd, xx, ooo, and bbbbbbbb are the decimal, hexadecimal, octal, and
+  binary forms, and [name] is a name printed only when bytes are in the range
+  of [0,127].
 
-  Any of --dec, --hex, --oct, and --name can be used to print only those forms
-  instead of the default behavior of printing all. However, --name by itself
-  implies that all forms will be printed.
+  Any of --dec, --hex, --oct, --bin, and --name can be used to print only those
+  forms instead of the default behavior of printing all. However, --name by
+  itself implies that all forms will be printed.
 
   optional:
     --dec, -d    : print decimal form
     --hex, -h    : print hexadecimal form
     --oct, -o    : print octal form
-    --name, -n   : do not print description
+    --bin, -b    : print binary form
+    --name, -n   : print description
 "#;
 
 fn main() -> ExitCode {

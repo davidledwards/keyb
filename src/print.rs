@@ -4,16 +4,18 @@ pub struct Printer {
     dec: bool,
     hex: bool,
     oct: bool,
+    bin: bool,
     name: bool,
 }
 
 impl Printer {
     pub fn new(opts: &Options) -> Printer {
-        let all = !opts.dec && !opts.hex && !opts.oct;
+        let all = !opts.dec && !opts.hex && !opts.oct && !opts.bin;
         Printer {
             dec: all || opts.dec,
             hex: all || opts.hex,
             oct: all || opts.oct,
+            bin: all || opts.bin,
             name: all || opts.name,
         }
     }
@@ -26,13 +28,19 @@ impl Printer {
             if self.dec {
                 print!(" ");
             }
-            print!("{:02X}", c);
+            print!("{:02x}", c);
         }
         if self.oct {
             if self.dec || self.hex {
                 print!(" ");
             }
             print!("{:3o}", c);
+        }
+        if self.bin {
+            if self.dec || self.hex || self.oct {
+                print!(" ");
+            }
+            print!("{:08b}", c);
         }
         if self.name {
             if let Some(s) = describe(c) {
