@@ -2,6 +2,7 @@ use crate::error::{Error, Result};
 
 pub struct Options {
     pub help: bool,
+    pub version: bool,
     pub dec: bool,
     pub hex: bool,
     pub oct: bool,
@@ -13,6 +14,7 @@ impl Default for Options {
     fn default() -> Options {
         Options {
             help: false,
+            version: false,
             dec: false,
             hex: false,
             oct: false,
@@ -32,6 +34,7 @@ impl Options {
         while let Some(arg) = it.next() {
             match arg.as_str() {
                 "--help" => opts.help = true,
+                "--version" => opts.version = true,
                 "--dec" | "-d" => opts.dec = true,
                 "--hex" | "-h" => opts.hex = true,
                 "--oct" | "-o" => opts.oct = true,

@@ -13,6 +13,7 @@ use std::process::ExitCode;
 const USAGE: &str = r#"
 usage: keyb OPTIONS
        keyb --help
+       keyb --version
 
   Echoes individual bytes read from the terminal until ^D is pressed. If STDIN
   is not a terminal, then the input stream is processed as a sequence of bytes
@@ -64,6 +65,15 @@ fn run() -> Result<()> {
     if opts.help {
         println!("{}", USAGE);
         Ok(())
+    } else if opts.version {
+        println!(
+            "{} {} ({} {})",
+            env!("CARGO_PKG_NAME"),
+            env!("CARGO_PKG_VERSION"),
+            env!("KEYB_VERSION_HASH"),
+            env!("KEYB_VERSION_DATE")
+        );
+        Ok(())
     } else {
         let pr = Printer::new(&opts);
         if term::is_tty() {
@@ -75,7 +85,7 @@ fn run() -> Result<()> {
 }
 
 fn process_tty(pr: &Printer) -> Result<()> {
-    println!("press ^D to exit");
+    println!("press ^D to exit (use 'keyb --help' for additional info)");
     let term = term::init()?;
     let mut tty = io::stdin().bytes();
     loop {
