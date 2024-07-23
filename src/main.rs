@@ -53,12 +53,12 @@ fn run() -> Result<()> {
 }
 
 fn process_tty(pr: &Printer) -> Result<()> {
-    println!("press ^D to exit (use 'keyb --help' for additional info)");
+    println!("press ^C to exit (use 'keyb --help' for additional info)");
     let term = term::init()?;
     let mut tty = io::stdin().bytes();
     loop {
         match tty.next().transpose()? {
-            Some(b'\x04') => break,
+            Some(b'\x03') => break,
             Some(c) => {
                 pr.print(c);
                 print!("\r");

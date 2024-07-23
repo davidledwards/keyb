@@ -2,7 +2,7 @@ usage: keyb OPTIONS
        keyb --help
        keyb --version
 
-  Echoes individual bytes read from the terminal until ^D is pressed. If STDIN
+  Echoes individual bytes read from the terminal until ^C is pressed. If STDIN
   is not a terminal, then the input stream is processed as a sequence of bytes
   and terminates.
 
