@@ -15,10 +15,10 @@ brew install keyb
 
 Releases can be downloaded directly from [GitHub](https://github.com/davidledwards/keyb/releases).
 
-Alternatively, using the [GitHub CLI](https://cli.github.com/), releases can also be downloaded from the command line. For example, to download version `0.1.0`, run the following command.
+Alternatively, using the [GitHub CLI](https://cli.github.com/), releases can also be downloaded from the command line. For example, to download version `0.2.0`, run the following command.
 
 ```shell
-gh release download --repo https://github.com/davidledwards/keyb v0.1.0
+gh release download --repo https://github.com/davidledwards/keyb v0.2.0
 ```
 
 ## Usage
@@ -49,14 +49,11 @@ target/release/keyb [options]
 
 ## Release
 
-Releases containing binary artifacts are published on GitHub. The `release.sh` script automates the release process, which makes the following assumptions.
-
-* The [GitHub CLI](https://cli.github.com/) has been installed.
-* The project has been built using `cargo build -r`.
+Releases containing binary artifacts are published on GitHub. The `release.sh` script automates the release process, which assumes that [GitHub CLI](https://cli.github.com/) has been installed.
 
 The version of the release is derived from the package version in `Cargo.toml`. A new release on GitHub generates a corresponding tag, so the assumption is that the version number has been appropriately incremented. Otherwise, the release creation process will fail.
 
-If the release process is successful, a new tag of the format `v<version>` is automatically created. For example, if the package version in `Cargo.toml` is `0.1.0`, then the corresponding tag is `v0.1.0`.
+If the release process is successful, a new tag of the format `v<version>` is automatically created. For example, if the package version in `Cargo.toml` is `0.2.0`, then the corresponding tag is `v0.2.0`.
 
 If the release process was problematic in any way, it can be deleted using the following command.
 
