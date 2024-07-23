@@ -35,5 +35,10 @@ do
 done
 
 # Create actual release in GitHub
-gh release create --title "$__VERSION" --generate-notes "v$__VERSION" "${__TARS[@]}"
-echo "released $__VERSION"
+gh release create --title "$__VERSION" --generate-notes "v$__VERSION" ${__TARS[@]}
+
+if [ $? -eq 0 ]; then
+    echo "$__VERSION: release successful"
+else
+    echo "$__VERSION: release failed"
+fi
