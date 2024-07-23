@@ -5,23 +5,35 @@ if [[ -z $(which gh) ]]; then
     exit 1
 fi
 
-__BIN_DIR=$(pwd)/target/release
-__BIN=$__BIN_DIR/keyb
+function build() {
+    local __TARGET="$1"
+    local __BIN_DIR="$(pwd)/target/${__TARGET}/release"
+    local __BIN="$__BIN_DIR/keyb"
 
-if [[ ! -e $__BIN ]]; then
-    echo "$__BIN: target binary does not exist"
-    exit 1
-fi
+    echo "$__TARGET: building target"
+    cargo build --release --target=${__TARGET}
 
-# Derive version number based on what the binary reports, which itself is derived
-# from the package configuration.
-__VERSION=$($__BIN --version | cut -d " " -f 2)
+    if [ $? -ne 0 ]; then
+        echo "$__BIN: build failure"
+        exit 1
+    fi
 
-# Create tarball and checksum artifacts.
-__TAR="$__BIN_DIR/keyb-${__VERSION}-x86_64-unix.tar.gz"
-tar -czf "$__TAR" -C "$__BIN_DIR keyb"
-shasum -a 256 "$__TAR" > "$__TAR.sha256"
+    __TAR="$__BIN_DIR/keyb-${__VERSION}-$(uname -m)-unix.tar.gz"
+    tar -czf "$__TAR" -C "$__BIN_DIR" keyb
+    shasum -a 256 "$__TAR" > "$__TAR.sha256"
+}
+
+echo "detecting version"
+__VERSION=$(cargo run --release -- --version | cut -d " " -f 2)
+
+__TARGETS=("aarch64-apple-darwin" "x86_64-apple-darwin")
+__TARS=()
+for __TARGET in "${__TARGETS[@]}"
+do
+    build "$__TARGET"
+    __TARS+=("$__TAR" "$__TAR.sha256")
+done
 
 # Create actual release in GitHub
-gh release create --title "$__VERSION" --generate-notes "v$__VERSION" "$__TAR"*
+gh release create --title "$__VERSION" --generate-notes "v$__VERSION" "${__TARS[@]}"
 echo "released $__VERSION"
