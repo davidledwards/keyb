@@ -13,11 +13,15 @@ usage: keyb OPTIONS
   By default, each byte read from the terminal is displayed on a single line
   of output as follows:
 
-    ddd xx ooo bbbbbbbb [name]
+    [*] ddd xx ooo bbbbbbbb [name]
 
-  where ddd, xx, ooo, and bbbbbbbb are the decimal, hexadecimal, octal, and
+  Where ddd, xx, ooo, and bbbbbbbb are the decimal, hexadecimal, octal, and
   binary forms, and [name] is a name printed only when bytes are in the range
   of [0,127].
+
+  The `*` is printed as a prefix when at least one byte becomes available in
+  STDIN following a previously empty buffer, essentially designed to show
+  sequences of related bytes.
 
   Any of --dec, --hex, --oct, --bin, and --name can be used to print only those
   forms instead of the default behavior of printing all. However, --name by

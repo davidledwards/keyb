@@ -6,10 +6,11 @@ if [[ -z $(which gh) ]]; then
 fi
 
 function build() {
+    local __PROG="keyb"
     local __ARCH="$1"
     local __TARGET="${__ARCH}-apple-darwin"
     local __BIN_DIR="$(pwd)/target/${__TARGET}/release"
-    local __BIN="$__BIN_DIR/keyb"
+    local __BIN="$__BIN_DIR/$__PROG"
 
     echo "$__TARGET: building target"
     cargo build --release --target=${__TARGET}
@@ -18,8 +19,8 @@ function build() {
         exit 1
     fi
 
-    __TAR="$__BIN_DIR/keyb-${__VERSION}-${__ARCH}-unix.tar.gz"
-    tar -czf "$__TAR" -C "$__BIN_DIR" keyb
+    __TAR="$__BIN_DIR/$__PROG-${__VERSION}-${__ARCH}-unix.tar.gz"
+    tar -czf "$__TAR" -C "$__BIN_DIR" "$__PROG"
     shasum -a 256 "$__TAR" > "$__TAR.sha256"
 }
 
@@ -34,7 +35,6 @@ do
     __FILES+=("$__TAR" "$__TAR.sha256")
 done
 
-# Create actual release in GitHub
 gh release create --title "$__VERSION" --generate-notes "v$__VERSION" ${__FILES[@]}
 if [ $? -eq 0 ]; then
     echo "$__VERSION: release successful"

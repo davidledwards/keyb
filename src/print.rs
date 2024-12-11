@@ -20,7 +20,12 @@ impl Printer {
         }
     }
 
-    pub fn print(&self, c: u8) {
+    pub fn print(&self, c: u8, highlight: bool) {
+        if highlight {
+            print!("\x1b[31m* \x1b[0m");
+        } else {
+            print!("  ");
+        }
         if self.dec {
             print!("{:3}", c);
         }

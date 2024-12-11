@@ -40,7 +40,7 @@ impl Options {
                 "--oct" | "-o" => opts.oct = true,
                 "--bin" | "-b" => opts.bin = true,
                 "--name" | "-n" => opts.name = true,
-                _ => return Err(Error::Options(format!("{}: unexpected argument", arg))),
+                arg => return Err(Error::unexpected_arg(arg)),
             };
         }
         Ok(opts)
