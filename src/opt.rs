@@ -31,9 +31,7 @@ impl Options {
         T: IntoIterator<Item = String>,
     {
         let mut opts = Options::default();
-//        let mut it = args.into_iter();
         for arg in args.into_iter() {
-//        while let Some(arg) = it.next() {
             match arg.as_str() {
                 "--help" => opts.help = true,
                 "--version" => opts.version = true,
