@@ -30,10 +30,13 @@ USAGE
   itself implies that all forms will be printed.
 
 OPTIONS
-  --dec, -d    : print decimal form
-  --hex, -h    : print hexadecimal form
-  --oct, -o    : print octal form
-  --bin, -b    : print binary form
-  --name, -n   : print description
-  --help       : print this help
-  --version    : print version information
+Output
+  --dec, -d      : print decimal form
+  --hex, -x      : print hexadecimal form
+  --oct, -o      : print octal form
+  --bin, -b      : print binary form
+  --name, -n     : print description
+
+Help
+  --help, -h     : print this help
+  --version, -v  : print version information

@@ -15,15 +15,15 @@ brew install keyb
 
 Releases can be downloaded directly from [GitHub](https://github.com/davidledwards/keyb/releases).
 
-Alternatively, using the [GitHub CLI](https://cli.github.com/), releases can also be downloaded from the command line. For example, to download version `0.2.1`, run the following command.
+Alternatively, using the [GitHub CLI](https://cli.github.com/), releases can also be downloaded from the command line. For example, to download version `0.4.0`, run the following command.
 
 ```shell
-gh release download --repo https://github.com/davidledwards/keyb v0.2.1
+gh release download --repo https://github.com/davidledwards/keyb v0.4.0
 ```
 
 ## Usage
 
-`keyb` is quite simple. Use `--help` to print a description of all available options.
+`keyb` is quite simple. Use `--help` (or `-h`) to print a description of all available options.
 
 ## Release
 

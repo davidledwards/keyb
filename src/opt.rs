@@ -1,26 +1,26 @@
 use crate::error::{Error, Result};
 
 pub struct Options {
-    pub help: bool,
-    pub version: bool,
     pub dec: bool,
     pub hex: bool,
     pub oct: bool,
     pub bin: bool,
     pub name: bool,
+    pub help: bool,
+    pub version: bool,
 }
 
 #[allow(clippy::derivable_impls, reason = "retain expressiveness")]
 impl Default for Options {
     fn default() -> Options {
         Options {
-            help: false,
-            version: false,
             dec: false,
             hex: false,
             oct: false,
             bin: false,
             name: false,
+            help: false,
+            version: false,
         }
     }
 }
@@ -33,13 +33,13 @@ impl Options {
         let mut opts = Options::default();
         for arg in args.into_iter() {
             match arg.as_str() {
-                "--help" => opts.help = true,
-                "--version" => opts.version = true,
                 "--dec" | "-d" => opts.dec = true,
-                "--hex" | "-h" => opts.hex = true,
+                "--hex" | "-x" => opts.hex = true,
                 "--oct" | "-o" => opts.oct = true,
                 "--bin" | "-b" => opts.bin = true,
                 "--name" | "-n" => opts.name = true,
+                "--help" | "-h" => opts.help = true,
+                "--version" | "-v" => opts.version = true,
                 arg => return Err(Error::unexpected_arg(arg)),
             };
         }

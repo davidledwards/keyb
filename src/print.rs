@@ -27,29 +27,29 @@ impl Printer {
             print!("  ");
         }
         if self.dec {
-            print!("{:3}", c);
+            print!("{c:3}");
         }
         if self.hex {
             if self.dec {
                 print!(" ");
             }
-            print!("{:02x}", c);
+            print!("{c:02x}");
         }
         if self.oct {
             if self.dec || self.hex {
                 print!(" ");
             }
-            print!("{:3o}", c);
+            print!("{c:3o}");
         }
         if self.bin {
             if self.dec || self.hex || self.oct {
                 print!(" ");
             }
-            print!("{:08b}", c);
+            print!("{c:08b}");
         }
         if self.name {
             if let Some(s) = describe(c) {
-                print!(" {}", s);
+                print!(" {s}");
             }
         }
         println!();
