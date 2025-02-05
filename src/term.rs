@@ -17,7 +17,7 @@ pub fn init() -> Result<termios> {
         term.assume_init()
     };
     unsafe {
-        let mut raw_term = term.clone();
+        let mut raw_term = term;
         libc::cfmakeraw(&mut raw_term);
         raw_term.c_cc[VMIN] = 0;
         raw_term.c_cc[VTIME] = 1;

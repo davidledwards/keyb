@@ -10,6 +10,7 @@ pub struct Options {
     pub name: bool,
 }
 
+#[allow(clippy::derivable_impls, reason = "retain expressiveness")]
 impl Default for Options {
     fn default() -> Options {
         Options {
@@ -30,8 +31,9 @@ impl Options {
         T: IntoIterator<Item = String>,
     {
         let mut opts = Options::default();
-        let mut it = args.into_iter();
-        while let Some(arg) = it.next() {
+//        let mut it = args.into_iter();
+        for arg in args.into_iter() {
+//        while let Some(arg) = it.next() {
             match arg.as_str() {
                 "--help" => opts.help = true,
                 "--version" => opts.version = true,
